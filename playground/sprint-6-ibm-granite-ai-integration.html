@@ -1,0 +1,119 @@
+
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, "Segoe UI", system-ui, sans-serif; font-size: 14px; line-height: 1.65; color: #1f2328; background: #fff; padding: 28px 24px 48px; max-width: 760px; margin: 0 auto; }
+  .sprint-badge { display: inline-flex; align-items: center; gap: 7px; background: #1a2e50; color: #4ade80; font-size: 11px; font-weight: 700; padding: 4px 14px; border-radius: 20px; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 18px; }
+  h1 { font-size: 22px; font-weight: 800; letter-spacing: -.02em; margin-bottom: 5px; }
+  .sub { color: #57606a; font-size: 13.5px; margin-bottom: 32px; }
+  h2 { font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #57606a; margin-bottom: 12px; padding-bottom: 7px; border-bottom: 1px solid #e5e7eb; margin-top: 28px; }
+  .flow { display: flex; flex-direction: column; gap: 0; margin-bottom: 24px; }
+  .flow-step { display: flex; align-items: flex-start; gap: 14px; padding: 13px 0; border-bottom: 1px solid #f0f2f5; }
+  .flow-step:last-child { border-bottom: none; }
+  .flow-num { width: 26px; height: 26px; border-radius: 50%; background: #2563b0; color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .flow-body { flex: 1; }
+  .flow-title { font-size: 13.5px; font-weight: 700; color: #1f2328; margin-bottom: 2px; }
+  .flow-desc  { font-size: 12.5px; color: #57606a; line-height: 1.6; }
+  code { font-family: "Cascadia Code", "Fira Code", monospace; font-size: 12px; background: #f0f2f5; padding: 1px 5px; border-radius: 4px; }
+  .config-card { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 12px; padding: 18px 20px; margin-bottom: 16px; }
+  .config-row { display: flex; gap: 12px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid #e9eaec; }
+  .config-row:last-child { border-bottom: none; }
+  .config-key { font-size: 12.5px; font-weight: 700; color: #1f2328; min-width: 140px; flex-shrink: 0; }
+  .config-val { font-size: 12.5px; color: #57606a; }
+  .fallback-box { background: #edf7f2; border: 1px solid #b8e4d0; border-radius: 10px; padding: 14px 18px; margin-top: 20px; }
+  .fallback-box p { font-size: 13px; color: #1a7f4e; line-height: 1.7; }
+  .fallback-box strong { font-weight: 700; }
+  .prompt-box { background: #1a2e50; border-radius: 10px; padding: 18px 20px; margin-bottom: 16px; }
+  .prompt-box p { font-size: 12.5px; color: rgba(255,255,255,0.78); line-height: 1.7; }
+  .prompt-box strong { color: #4ade80; }
+  .where-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .where-item { background: #f7f8fa; border: 1px solid #e5e7eb; border-radius: 9px; padding: 11px 14px; }
+  .where-item .wt { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .07em; color: #57606a; margin-bottom: 3px; }
+  .where-item .wv { font-size: 13px; font-weight: 600; color: #1f2328; }
+  footer { text-align: center; font-size: 12px; color: #9ca3af; padding-top: 24px; border-top: 1px solid #e5e7eb; margin-top: 32px; }
+</style>
+</head>
+<body>
+
+<div class="sprint-badge">✅ Sprint 6 Complete</div>
+<h1>IBM Granite AI Integration</h1>
+<p class="sub">Live AI reasoning layer wired into Campaign Forge AI via Cloudflare Worker proxy. File: <code>campaign-forge-ai.html</code> · Full fallback guarantee. IBM API key never exposed to the browser.</p>
+
+<h2>How to Connect IBM Granite</h2>
+<div class="config-card">
+  <div class="config-row"><span class="config-key">1. Deploy the Worker</span><span class="config-val">Follow <code>cloudflare-worker/DEPLOY.md</code> — run <code>wrangler deploy</code>, set <code>IBM_API_KEY</code> secret and <code>WATSONX_PROJECT_ID</code> in <code>wrangler.toml</code></span></div>
+  <div class="config-row"><span class="config-key">2. Open wizard</span><span class="config-val">Click "Start Forging" on the homepage</span></div>
+  <div class="config-row"><span class="config-key">3. Click ⚙ AI Settings</span><span class="config-val">Button in the wizard nav bar (top-right)</span></div>
+  <div class="config-row"><span class="config-key">4. Cloudflare Worker URL</span><span class="config-val">Paste your <code>*.workers.dev</code> URL — e.g. <code>https://campaign-forge-ai-proxy.YOUR-SUBDOMAIN.workers.dev</code></span></div>
+  <div class="config-row"><span class="config-key">5. Model</span><span class="config-val"><code>ibm/granite-3-8b-instruct</code> (recommended) — select from dropdown</span></div>
+  <div class="config-row"><span class="config-key">6. Test Connection</span><span class="config-val">Click "Test Connection" — pings the Worker's <code>/test</code> endpoint which verifies IAM + Granite end-to-end</span></div>
+  <div class="config-row"><span class="config-key">7. Save</span><span class="config-val">Config persists in <code>sessionStorage</code> — button turns green "✓ Granite Connected"</span></div>
+</div>
+
+<h2>Data Flow Architecture</h2>
+<div class="flow">
+  <div class="flow-step">
+    <div class="flow-num">1</div>
+    <div class="flow-body">
+      <div class="flow-title">User completes Guided Campaign Wizard (5 steps · 32 fields)</div>
+      <div class="flow-desc">All inputs stored in <code>formData{}</code> and <code>tagSelections{}</code> — campaign name, sector, goal, problem, audience, channels, tone, KPIs, activities, partners, risks, and 20+ more fields.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">2</div>
+    <div class="flow-body">
+      <div class="flow-title">buildGranitePrompt() — 28-field structured prompt construction</div>
+      <div class="flow-desc">All <code>formData</code> and <code>tagSelections</code> fields serialised into a clean labelled list. A system prompt instructs Granite to behave as a 5-expert consulting team and return a <strong>single structured JSON object</strong> with 12 top-level keys.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">3</div>
+    <div class="flow-body">
+      <div class="flow-title">callWorkerProxy() — single POST to the Cloudflare Worker</div>
+      <div class="flow-desc">POSTs <code>{ input, model, parameters }</code> to <code>GRANITE_CONFIG.workerUrl + "/analyze"</code>. The Worker handles IBM IAM token exchange and watsonx.ai forwarding server-side. The browser never sees the IBM API key. 90s timeout.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">4</div>
+    <div class="flow-body">
+      <div class="flow-title">Cloudflare Worker — IAM token exchange + Granite inference</div>
+      <div class="flow-desc">Worker exchanges <code>IBM_API_KEY</code> (Cloudflare Secret) for a bearer token via IBM IAM, then POSTs to <code>WATSONX_ENDPOINT/ml/v1/text/generation</code>. Returns <code>{ result: "..." }</code>. Token cached in Worker isolate for 55 minutes.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">5</div>
+    <div class="flow-body">
+      <div class="flow-title">parseGraniteResponse() — robust JSON extraction</div>
+      <div class="flow-desc">Strips markdown fences, finds outer <code>{ }</code> boundaries, parses JSON, and repairs common issues (trailing commas). Returns <code>null</code> on failure — triggering fallback.</div>
+    </div>
+  </div>
+  <div class="flow-step">
+    <div class="flow-num">6</div>
+    <div class="flow-body">
+      <div class="flow-title">AI data populates all output surfaces</div>
+      <div class="flow-desc">Expert Review cards, Forge Insights, Expert Collaboration thread, Team Recommendation, Campaign Builder deliverables — all replaced with AI content when <code>aiGeneratedData</code> is set.</div>
+    </div>
+  </div>
+</div>
+
+<h2>AI-Populated Output Surfaces</h2>
+<div class="where-grid">
+  <div class="where-item"><div class="wt">Expert Review Room</div><div class="wv">5 AI expert cards (scores, assessments, recommendations)</div></div>
+  <div class="where-item"><div class="wt">Forge Insights</div><div class="wv">4 AI-generated strategic insight items</div></div>
+  <div class="where-item"><div class="wt">Expert Collaboration</div><div class="wv">3-message AI consulting thread + Team Recommendation</div></div>
+  <div class="where-item"><div class="wt">Campaign Strategy Brief</div><div class="wv">AI overview, problem, goal, audience, strategic, ToC</div></div>
+  <div class="where-item"><div class="wt">Communication Strategy</div><div class="wv">AI core message, key messages, audience insights, channels</div></div>
+  <div class="where-item"><div class="wt">Creative Campaign Kit</div><div class="wv">AI slogans, visual direction, concepts, social, story</div></div>
+  <div class="where-item"><div class="wt">Implementation Roadmap</div><div class="wv">AI activities, timeline, stakeholders, engagement approach</div></div>
+  <div class="where-item"><div class="wt">Measurement Framework</div><div class="wv">AI indicators, KPIs, data sources, evaluation approach</div></div>
+</div>
+
+<div class="fallback-box" style="margin-top:18px">
+  <p><strong>Zero-disruption fallback guarantee:</strong> If Granite credentials are not configured, if the IAM token exchange fails, if the Granite API returns an error, or if the JSON cannot be parsed — the product silently falls back to the high-quality static expert templates built in Sprints 3–5. The user experience is identical in either mode. The AI loading strip shows the error message only in the analysis-transition screen, and only briefly. No screen is broken, no navigation is disrupted.</p>
+</div>
+
+<footer>Made with IBM Bob</footer>
+</body>
+</html>

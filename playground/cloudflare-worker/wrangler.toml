@@ -1,0 +1,23 @@
+name = "campaign-forge-ai-proxy"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+# ── Environment variables (non-secret) ──────────────────────────────────────
+# These are visible in your Cloudflare dashboard and in this file.
+# Do NOT put IBM_API_KEY here — use `wrangler secret put IBM_API_KEY` instead.
+[vars]
+WATSONX_ENDPOINT   = "https://us-south.ml.cloud.ibm.com"
+WATSONX_PROJECT_ID = "06d2ece6-754a-4638-abcd-1d99c986cbb2"
+
+# ── Secrets (set via CLI, never stored in this file) ────────────────────────
+# Run: wrangler secret put IBM_API_KEY
+# When prompted, paste your IBM Cloud API key.
+# It will be encrypted at rest in Cloudflare's secret store.
+#
+# Secret name expected by the Worker: IBM_API_KEY
+
+# ── Optional: restrict to specific routes ───────────────────────────────────
+# Uncomment and edit if you are deploying to a custom domain:
+# [[routes]]
+# pattern = "api.yourdomain.com/analyze"
+# zone_name = "yourdomain.com"
