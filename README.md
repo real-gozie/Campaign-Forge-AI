@@ -55,7 +55,7 @@ It brings campaign thinking into one structured workflow where ideas can be expl
 - [Repository Structure](#-repository-structure)
 - [Getting Started](#-getting-started)
 - [Demo](#-demo)
-- [Roadmap](#-roadmap)
+- [Roadmap](#%EF%B8%8F-roadmap)
 - [Acknowledgements](#-acknowledgements) 
 
 # 🎯 Product Vision
