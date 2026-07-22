@@ -47,6 +47,7 @@ It brings campaign thinking into one structured workflow where ideas can be expl
 - [Design Principles](#-design-principles)
 - [Who Campaign Forge AI Is For](#-who-campaign-forge-ai-is-for)
 - [How Campaign Forge AI Works](#-how-campaign-forge-ai-works)
+- [Export Your Campaign](#-export-your-campaign) 
 - [The FORGE Framework](#%EF%B8%8F-the-forge-framework)
 - [AI Approach & IBM Technology](#-ai-approach--ibm-technology)
 - [Technical Architecture & Data Flow](#%EF%B8%8F-technical-architecture--data-flow)
@@ -271,6 +272,20 @@ AI helps expand the possibilities, support exploration, and accelerate the creat
 At the heart of the experience is the **FORGE Framework**—the framework that gives Campaign Forge AI its identity and provides the conceptual structure behind the campaign-building journey.
 
 ---
+
+# 📤 Export Your Campaign
+
+Campaign Forge AI allows users to take the campaign they have developed inside the platform and export it for documentation, sharing, further editing, and implementation.
+
+Users can export their completed campaign in three formats:
+
+- **📄 PDF** — Generate a professionally formatted, print-ready version of the campaign that can be saved or shared as a PDF.
+- **📝 DOCX** — Export the campaign as a Word-compatible document for further editing, collaboration, and documentation.
+- **🗒 Markdown** — Export a structured Markdown version for lightweight documentation, version control, and further editing.
+
+The exported campaign brings together the key outputs developed throughout the Campaign Forge AI workflow, including strategic planning, communication strategy, creative concepts, implementation planning, monitoring and evaluation, risk assessment, and IBM Granite-powered recommendations.
+
+This means the campaign does not remain locked inside the platform. Once forged, it can be taken out of the studio and used in the formats teams already work with.
 
 # ⚒️ The FORGE Framework
 
