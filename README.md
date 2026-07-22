@@ -416,381 +416,274 @@ Campaign Forge AI exists to help creators navigate that space.
 **Forge the idea. Strengthen the strategy. Create with intention. Move toward action.**
 
 ---
----
-
 # 🤖 AI Approach & IBM Technology
 
-AI is at the center of Campaign Forge AI, but the platform is built around a simple principle:
+Campaign Forge AI uses AI as an **assistive reasoning layer within a structured campaign-development workflow**.
 
-> **AI should amplify creative thinking, not replace it.**
+The goal is not to replace the creator's judgment or turn campaign development into a one-click generation process. Instead, AI is used to help creators explore, assess, refine, and develop campaign ideas while keeping the human creator at the center of the process.
 
-Campaign Forge AI uses artificial intelligence as a collaborative layer within the campaign development process.
-
-Instead of treating AI as a tool that simply produces an output from a single prompt, the platform's approach is to integrate AI into a broader creative workflow where ideas can be explored, developed, and refined.
-
-The creator remains at the center of the process.
-
-AI supports the journey by helping expand possibilities, accelerate exploration, and provide additional perspectives during campaign development.
+The AI integration is built around **IBM Granite models accessed through IBM watsonx.ai**, with a Cloudflare Worker providing the server-side proxy between the browser application and IBM's inference services.
 
 ---
 
-## 🧠 The Role of AI
+## 🧠 Structured Campaign Context
 
-Campaign development involves multiple forms of thinking.
+Campaign Forge AI begins by collecting structured campaign information through its guided campaign wizard.
 
-Creators need to understand a challenge, consider their audience, develop a strategy, communicate an idea, and translate that strategy into creative outputs.
+The application gathers campaign inputs covering areas such as:
 
-Campaign Forge AI explores how AI can support these activities without removing the human element from the process.
+- Campaign purpose and goals
+- The challenge or problem being addressed
+- Target audience
+- Sector and context
+- Communication channels
+- Tone and creative direction
+- Activities and implementation considerations
+- Partners and stakeholders
+- Risks
+- KPIs and measurement considerations
 
-The AI layer is therefore positioned as a **creative intelligence partner**.
+These inputs are maintained as structured application data and are used to construct the context provided to the AI model.
 
-Its role is to help creators:
-
-- Explore campaign ideas.
-- Consider alternative perspectives.
-- Develop and refine creative directions.
-- Support strategic thinking.
-- Accelerate parts of the campaign development process.
-- Move from an initial concept toward a clearer direction.
-
-The creator remains responsible for the context, intent, judgment, and final decisions.
-
----
-
-## 🧩 AI + Human Collaboration
-
-Campaign Forge AI is designed around a collaborative relationship between the creator and AI.
-
-The process can be understood as:
-
-**Human Intent → AI-Assisted Exploration → Human Evaluation → Refinement → Creative Direction**
-
-The creator provides the purpose and context.
-
-AI helps expand the creative space.
-
-The creator evaluates the possibilities.
-
-The campaign is refined through an iterative process.
-
-This approach reflects the philosophy behind Campaign Forge AI:
-
-> **The best creative outcomes are not produced by humans or AI working alone, but by humans using AI thoughtfully.**
+This approach means that the AI does not receive an isolated question with no context. Instead, it receives a structured representation of the campaign being developed.
 
 ---
 
-# 🏗️ IBM Granite
+## 🧩 Structured Prompt Construction
 
-**IBM Granite** forms an important part of the AI technology foundation explored in Campaign Forge AI.
+The campaign information collected through the wizard is assembled into a structured prompt through the application's prompt-construction layer.
 
-Granite represents IBM's family of enterprise-focused foundation models designed to support practical AI applications.
+The `buildGranitePrompt()` function combines campaign data and selected options into a labelled prompt designed to provide Granite with the context required for campaign analysis and development.
 
-Within the Campaign Forge AI concept, IBM Granite supports the vision of bringing capable AI assistance into a structured campaign development workflow.
+The system prompt frames Granite as a **five-expert consulting team**, guiding the model to examine the campaign from multiple professional perspectives and return a structured response.
 
-The integration of IBM's AI technology reflects the project's broader goal of exploring how foundation models can move beyond simple content generation and become part of a more intentional creative and strategic process.
+This is a **prompt-based expert framework**, rather than a multi-agent architecture. The application does not claim to run five independent AI agents. Instead, a single Granite inference process is structured to simulate a multi-perspective consulting review.
 
-Rather than using AI simply to generate isolated outputs, Campaign Forge AI explores how AI can support the thinking that happens before, between, and after those outputs are created.
-
----
-
-# ☁️ IBM watsonx
-
-The Campaign Forge AI ecosystem also draws on IBM's **watsonx** AI ecosystem as part of its technology foundation.
-
-watsonx provides an enterprise-oriented environment for working with AI models and AI-powered applications.
-
-For Campaign Forge AI, the IBM AI ecosystem provides an opportunity to explore how modern foundation models can be integrated into a creative workflow while maintaining a focus on responsible and purposeful AI use.
-
-The combination of structured campaign thinking and AI technology forms the foundation of the Campaign Forge approach.
+The expected AI response is a structured JSON object that can be parsed and used by different parts of the application.
 
 ---
 
-# 🔄 The AI-Assisted Campaign Journey
+## ⚙️ IBM Granite + watsonx.ai
 
-The AI experience within Campaign Forge AI can be represented as a continuous loop:
+Campaign Forge AI uses IBM Granite as its foundation model layer through IBM watsonx.ai.
 
-**IDEA → EXPLORE → CHALLENGE → REFINE → CREATE → EVALUATE**
+The default configured model is:
 
-The creator begins with an idea or challenge.
+`ibm/granite-3-8b-instruct`
 
-AI-assisted exploration helps expand the creative possibilities.
+The application communicates with the model through the watsonx.ai text generation API.
 
-The creator reviews and challenges the direction.
+The AI integration follows this general sequence:
 
-The concept is refined.
-
-Creative development follows.
-
-The result can then be evaluated before moving toward implementation.
-
-This creates a more iterative relationship between the creator and AI rather than a simple:
-
-**Prompt → Output**
-
-model.
+1. The creator completes the guided campaign workflow.
+2. Campaign inputs are assembled into a structured prompt.
+3. The browser sends the prompt to the Campaign Forge AI Cloudflare Worker.
+4. The Worker exchanges the IBM Cloud API key for an IBM IAM bearer token.
+5. The Worker forwards the structured prompt to the watsonx.ai text generation endpoint.
+6. Granite generates the campaign analysis and structured response.
+7. The Worker returns the generated result to the browser.
+8. The application parses the structured response.
+9. The resulting AI data is distributed across relevant campaign-development surfaces.
 
 ---
 
-# 🛠️ How IBM Bob Was Used
+## 🔐 Secure API Proxy Architecture
 
-Campaign Forge AI was developed as part of the **IBM Bob Challenge**, using IBM Bob as the primary AI-assisted development environment.
+The IBM Cloud API key is **not stored in the browser application**.
 
-IBM Bob played an important role throughout the development process by supporting the transition from concept to working prototype.
+Instead, the integration uses a Cloudflare Worker as a server-side proxy.
 
-The development process involved using AI-assisted coding and iterative interaction to:
+The Worker stores the IBM Cloud API key as a Cloudflare Worker Secret named:
 
-- Translate product ideas into working interface components.
-- Develop the Campaign Forge AI user experience.
-- Build and refine the frontend.
-- Work with HTML, CSS, and JavaScript.
-- Explore AI integration using IBM technologies.
-- Iterate on the product based on testing and feedback.
-- Identify and troubleshoot implementation issues during development.
+`IBM_API_KEY`
 
-The development process was not simply a matter of generating code and accepting the result.
+The browser only stores the Worker URL and selected model configuration for the current session. The IBM API key remains on the server-side Worker environment.
 
-It involved an iterative cycle of:
+The Worker is responsible for:
 
-**Describe → Generate → Test → Identify Issues → Refine → Repeat**
+- Receiving campaign analysis requests.
+- Exchanging the IBM API key for an IAM bearer token.
+- Calling the watsonx.ai text generation API.
+- Returning the generated result to the browser.
+- Handling CORS preflight requests.
+- Providing `/analyze` and `/test` endpoints.
+- Temporarily caching IAM tokens within the Worker isolate to reduce repeated token exchanges.
 
-This allowed the product to evolve through continuous experimentation.
+This architecture keeps the IBM credential outside the client-side application.
 
----
-
-## 🧪 Building Through Iteration
-
-One of the most important lessons from building Campaign Forge AI was that AI-assisted development still requires active human direction.
-
-During development, implementation issues emerged that required investigation and adaptation.
-
-For example, some interactive behaviors were affected by the artifact environment's handling of JavaScript event handlers, including the stripping of `onclick` handlers during artifact sanitization.
-
-This required adapting the implementation approach rather than simply relying on the first generated solution.
-
-The experience demonstrated an important principle of AI-assisted development:
-
-> **AI can accelerate building, but human oversight is still essential.**
-
-The developer must understand the intended experience, test the output, identify what is not working, and guide the AI toward a better implementation.
-
-This iterative process became an important part of how Campaign Forge AI was developed.
+> **Security note:** The current prototype uses permissive CORS and does not authenticate individual users. For a production deployment, the Worker should restrict allowed origins and introduce appropriate access controls.
 
 ---
 
-# 💻 Development Technologies
+## 🧱 AI Output Processing
 
-The Campaign Forge AI prototype was developed using a combination of web technologies and IBM AI technologies.
+The generated response is not displayed directly as raw model output.
 
-### Frontend
+Campaign Forge AI uses a response-processing layer to extract structured data from the Granite response.
 
-- **HTML** — Structure and content.
-- **CSS** — Visual design, layout, styling, and responsive presentation.
-- **JavaScript** — Interactive behavior and frontend logic.
+The `parseGraniteResponse()` function is responsible for:
 
-### AI & IBM Technologies
+- Removing Markdown code fences when present.
+- Locating the outer JSON boundaries.
+- Parsing the structured response.
+- Handling certain common formatting issues such as trailing commas.
+- Returning a failure state when the response cannot be parsed successfully.
 
-- **IBM Granite** — Foundation model technology explored within the AI layer.
-- **IBM watsonx ecosystem** — AI technology and platform ecosystem.
-- **IBM Bob** — AI-assisted development environment used to build and iterate on the prototype.
+When successfully parsed, the resulting data is stored in the application's `aiGeneratedData` runtime state.
 
-The technology choices reflect the project's focus on combining accessible web technologies with modern AI capabilities.
-
----
-
-# ⚙️ Technology Philosophy
-
-The technology behind Campaign Forge AI is guided by a simple principle:
-
-> **Technology should serve the creative process.**
-
-The platform is not built around technology for its own sake.
-
-HTML, CSS, and JavaScript provide the interface through which creators interact with the experience.
-
-AI technologies provide the intelligence layer that supports exploration and creative development.
-
-IBM Bob supports the development process that brings these ideas together.
-
-The result is an experiment in how AI-assisted development can be used to build a more structured approach to campaign creation.
-
----
----
-
-# 🏗️ System Architecture
-
-Campaign Forge AI is structured as a layered creative intelligence platform.
-
-At a high level, the system brings together:
-
-1. **User Experience Layer**
-2. **Application & Interaction Layer**
-3. **AI Intelligence Layer**
-4. **IBM Technology Layer**
-5. **Data & Configuration Layer**
-
-The architecture is designed to keep the user experience focused on campaign development while allowing AI capabilities and supporting technologies to work behind the scenes.
+This allows the AI output to be used across different campaign-development surfaces rather than being presented as a single block of generated text.
 
 ---
 
-## 🖥️ 1. User Experience Layer
+## 🎯 AI-Powered Campaign Development Surfaces
 
-The User Experience Layer is the part of Campaign Forge AI that creators interact with directly.
+AI-generated data can be used to populate multiple areas of the Campaign Forge AI experience, including:
 
-It provides the visual environment through which users explore the platform and engage with the campaign development experience.
+- **Expert Review Room** — AI-assisted expert assessments, scores, and recommendations.
+- **Forge Insights** — strategic insights derived from the campaign context.
+- **Expert Collaboration** — a structured consulting-style discussion and team recommendation.
+- **Campaign Strategy Brief** — campaign overview, problem framing, goals, audience, and strategic direction.
+- **Communication Strategy** — core messaging, audience insights, and channel considerations.
+- **Creative Campaign Kit** — slogans, creative concepts, visual direction, social content, and storytelling ideas.
+- **Implementation Roadmap** — activities, timelines, stakeholder considerations, and engagement approaches.
+- **Measurement Framework** — indicators, KPIs, data sources, and evaluation considerations.
 
-The interface is built using standard web technologies:
-
-- **HTML** for structure.
-- **CSS** for styling, layout, and visual presentation.
-- **JavaScript** for interactive behavior and application logic.
-
-The interface is designed to make the campaign development process feel approachable, structured, and engaging.
-
----
-
-## ⚙️ 2. Application & Interaction Layer
-
-The Application & Interaction Layer connects the user interface with the underlying campaign development experience.
-
-This layer is responsible for coordinating interactions within the application and supporting the flow of information between the creator and the AI-assisted experience.
-
-It acts as the bridge between:
-
-**User Input → Application Logic → AI-Assisted Processing → User Experience**
-
-The objective is to ensure that the AI experience remains connected to the creator's campaign context rather than functioning as an isolated chatbot or content generator.
+The purpose of this architecture is to connect AI assistance to the broader campaign-development journey rather than treating AI generation as an isolated feature.
 
 ---
 
-## 🧠 3. AI Intelligence Layer
+## 🛡️ Graceful AI Fallback
 
-The AI Intelligence Layer represents the artificial intelligence capabilities that support Campaign Forge AI.
+Campaign Forge AI is designed so that live AI inference is not the only path through the experience.
 
-This layer is designed to assist with the creative and strategic thinking involved in campaign development.
+If AI credentials are unavailable, the IAM token exchange fails, the watsonx.ai request returns an error, or the generated response cannot be parsed successfully, the application can fall back to pre-built expert templates developed within the application.
 
-At a conceptual level:
+This creates a more resilient experience in which campaign development can continue even when live AI inference is unavailable.
 
-**Creator Input**
-↓
-**Campaign Context**
-↓
-**AI-Assisted Exploration**
-↓
-**Creative & Strategic Refinement**
-↓
-**Creator Review**
-↓
-**Campaign Direction**
-
-The AI layer is designed to support the creator rather than replace human judgment.
+The AI therefore acts as an enhancement layer rather than a single point of failure for the entire application experience.
 
 ---
 
-## ☁️ 4. IBM Technology Layer
+# 🏗️ Technical Architecture & Data Flow
 
-The IBM Technology Layer represents the IBM technologies incorporated into the Campaign Forge AI ecosystem.
+The technical architecture connects the campaign-building interface, structured prompt layer, Cloudflare Worker proxy, IBM IAM, watsonx.ai, and Granite.
 
-This includes:
+```mermaid
+flowchart TD
+    A[Campaign Creator] --> B[Guided Campaign Wizard]
+    B --> C[Structured Campaign Data]
+    C --> D[buildGranitePrompt]
 
-- **IBM Granite** for foundation model capabilities.
-- **IBM watsonx ecosystem** for AI-related technology and experimentation.
-- **IBM Bob** as the AI-assisted development environment used during the creation and iteration of the prototype.
+    D -->|POST /analyze| E[Cloudflare Worker Proxy]
 
-These technologies support different aspects of the project, from AI capabilities to the development process itself.
+    E --> F[IBM IAM Token Exchange]
+    F -->|Bearer Token| G[IBM watsonx.ai]
+    G --> H[IBM Granite 3 8B Instruct]
+
+    H -->|generated_text| E
+    E -->|JSON result| I[parseGraniteResponse]
+
+    I --> J[aiGeneratedData]
+
+    J --> K[Expert Review]
+    J --> L[Forge Insights]
+    J --> M[Campaign Strategy]
+    J --> N[Communication Strategy]
+    J --> O[Creative Campaign Kit]
+    J --> P[Implementation Roadmap]
+    J --> Q[Measurement Framework]
+
+    I -->|Parsing or inference failure| R[Static Expert Templates]
+
+    R --> K
+    R --> L
+    R --> M
+    R --> N
+    R --> O
+    R --> P
+    R --> Q
+```
+
+### 🔄 Core Data Flow
+
+The main AI request cycle follows this sequence:
+
+    Creator
+        ↓
+    Guided Campaign Wizard
+        ↓
+    Structured Campaign Data
+        ↓
+    buildGranitePrompt()
+        ↓
+    POST /analyze
+        ↓
+    Cloudflare Worker Proxy
+        ↓
+    IBM IAM Token Exchange
+        ↓
+    watsonx.ai
+        ↓
+    IBM Granite
+        ↓
+    Generated Structured Response
+        ↓
+    parseGraniteResponse()
+        ↓
+    aiGeneratedData
+        ↓
+    Campaign Development Modules
+
+If the AI request or response processing fails:
+
+    AI Inference Failure
+            ↓
+    Response Parsing Failure
+            ↓
+    Static Expert Templates
+            ↓
+    Campaign Development Continues
+
+This separation allows the product to combine **structured campaign methodology, human decision-making, AI-assisted reasoning, and resilient application behavior** within a single workflow.
 
 ---
 
-## 📦 5. Data & Configuration Layer
+## 🧰 Technology Stack
 
-Campaign Forge AI also includes supporting project components for managing application data, configuration, and development resources.
+The current implementation brings together several technologies and services:
 
-The repository structure includes dedicated areas for:
-
-- Database-related resources.
-- Development and experimentation.
-- Application settings.
-- Static assets and screenshots.
-
-These components support the overall organization and maintainability of the project.
-
----
-
-# 🔄 High-Level Data Flow
-
-At a conceptual level, the Campaign Forge AI experience follows this flow:
-
-**Creator**
-↓
-**Campaign Idea / Challenge**
-↓
-**Campaign Forge Interface**
-↓
-**Application Logic**
-↓
-**AI-Assisted Processing**
-↓
-**Creative Exploration & Refinement**
-↓
-**Creator Review**
-↓
-**Campaign Direction**
-
-The creator remains involved throughout the process, ensuring that AI-assisted outputs are evaluated within the context and purpose of the campaign.
-
----
-
-# 🧱 Architecture Overview
-
-The high-level architecture can be summarized as:
-
-| Layer | Role |
+| Layer | Technology / Component |
 |---|---|
-| **User Experience** | Provides the interface through which creators interact with Campaign Forge AI. |
-| **Application & Interaction** | Coordinates user interactions and application behavior. |
-| **AI Intelligence** | Supports campaign exploration, creative thinking, and refinement. |
-| **IBM Technology** | Provides the AI and development technologies used within the project ecosystem. |
-| **Data & Configuration** | Supports project data, settings, assets, and development resources. |
+| Frontend | HTML, CSS, JavaScript |
+| AI Foundation Model | IBM Granite |
+| AI Platform | IBM watsonx.ai |
+| Authentication | IBM IAM |
+| AI Proxy / Serverless Layer | Cloudflare Workers |
+| Worker Configuration | Cloudflare Wrangler |
+| Runtime AI Configuration | Browser `sessionStorage` |
+| AI Response Format | Structured JSON |
+| Fallback Layer | Static expert templates |
 
-A detailed architecture diagram will be added to the repository as the implementation is further documented.
-
----
-
-# 💻 Technology Stack
-
-## Frontend
-
-- **HTML5**
-- **CSS3**
-- **JavaScript**
-
-## Artificial Intelligence
-
-- **IBM Granite**
-- **IBM watsonx ecosystem**
-
-## Development
-
-- **IBM Bob**
-- AI-assisted coding and iterative development
-
-## Project Resources
-
-- Campaign assets
-- Product screenshots
-- Application configuration
-- Database-related resources
-- Development and experimentation resources
+The project was developed and iterated through sprint-based development, with IBM Bob used as the primary development environment during the build process.
 
 ---
 
-# 📐 Architecture Diagram
+## 🔭 Design Philosophy
 
-The architecture diagram for Campaign Forge AI will be added here to provide a visual representation of how the major components interact.
+The technical architecture reflects the broader philosophy behind Campaign Forge AI:
 
-> **Architecture diagram coming soon.**
+> **AI should strengthen structured thinking, not replace it.**
 
-The diagram will illustrate the relationship between:
+The creator remains responsible for the campaign's purpose, context, judgment, and final decisions.
 
-**Creator → Campaign Forge Interface → Application Layer → AI Layer → IBM Technologies → Campaign Output**
+The AI layer provides additional reasoning capacity, structured analysis, creative exploration, and campaign-development support.
 
----
+The FORGE Framework provides the methodology.
+
+The guided wizard provides the structure.
+
+IBM Granite and watsonx.ai provide AI-assisted reasoning.
+
+The creator brings the judgment.
+
+Together, these components form the Campaign Forge AI experience.
