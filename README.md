@@ -685,3 +685,51 @@ IBM Granite and watsonx.ai provide AI-assisted reasoning.
 The creator brings the judgment.
 
 Together, these components form the Campaign Forge AI experience.
+
+# 📁 Repository Structure
+
+The repository is organized to separate the main Campaign Forge AI experience, development playground files, visual assets, configuration, and the IBM Granite integration layer.
+
+```text
+Campaign-Forge-AI/
+├── .vscode/
+│   └── launch.json
+│
+├── assets/
+│   ├── screenshots/
+│   └── banner.png
+│
+├── db/
+│   └── bob.db
+│
+├── playground/
+│   ├── cloudflare-worker/
+│   │   ├── DEPLOY.md
+│   │   ├── worker.js
+│   │   └── wrangler.toml
+│   │
+│   ├── Menu.html
+│   ├── campaign-forge-ai-home-studio-guided-wizard.html
+│   ├── campaign-forge-ai.html
+│   └── sprint-6-ibm-granite-ai-integration.html
+│
+├── settings/
+│   └── settings.json
+│
+└── README.md
+
+└── README.md
+```
+
+## Key Directories and Files
+
+- **`.vscode/`** — Development and debugging configuration for the project.
+- **`assets/`** — Visual assets used by the project, including the main banner and product screenshots.
+- **`db/`** — Project database and application data resources.
+- **`playground/`** — Main prototype and development workspace containing the Campaign Forge AI application files and supporting experiments.
+- **`playground/cloudflare-worker/`** — Server-side proxy layer used to connect the Campaign Forge AI application with IBM watsonx.ai and IBM Granite while keeping the IBM API key out of the browser.
+- **`playground/cloudflare-worker/worker.js`** — Cloudflare Worker implementation responsible for handling requests between the frontend and IBM's AI services.
+- **`playground/cloudflare-worker/wrangler.toml`** — Cloudflare Worker deployment and environment configuration.
+- **`playground/cloudflare-worker/DEPLOY.md`** — Deployment instructions for configuring and deploying the Cloudflare Worker.
+- **`settings/`** — Project-level configuration files.
+- **`README.md`** — Project documentation, architecture overview, setup information, and development notes.
