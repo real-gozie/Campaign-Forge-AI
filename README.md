@@ -39,11 +39,11 @@ It brings campaign thinking into one structured workflow where ideas can be expl
 ## Table of Contents
 
 - [Product Vision](#-product-vision)
-- [Why "Forge"?](#-why-"forge"?)
+- [Why "Forge"?](#%EF%B8%8F-why-forge) 
 - [The Challenge](#-the-challenge)
 - [Our Solution](#-our-solution)
 - [Why Campaign Forge AI Matters](#-why-campaign-forge-ai-matters)
-- [What Makes Campaign Forge AI Different](#-what-makes-campaign-forge-ai-different?) 
+- [What Makes Campaign Forge AI Different](#-what-makes-campaign-forge-ai-different) 
 - [Design Principles](#-design-principles)
 - [Who Campaign Forge AI Is For](#-who-campaign-forge-ai-is-for)
 - [How Campaign Forge AI Works](#-how-campaign-forge-ai-works)
