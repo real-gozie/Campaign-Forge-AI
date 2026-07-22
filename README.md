@@ -46,19 +46,17 @@ It brings campaign thinking into one structured workflow where ideas can be expl
 - [What Makes Campaign Forge AI Different](#what-makes-campaign-forge-ai-different)
 - [Design Principles](#design-principles)
 - [Who Campaign Forge AI Is For](#who-campaign-forge-ai-is-for)
-- [Inside Campaign Forge AI](#inside-campaign-forge-ai)
+- [How Campaign Forge AI Works](#how-campaign-forge-ai-works)
 - [The FORGE Framework](#the-forge-framework)
-- [AI Approach](#ai-approach)
-- [IBM Granite & IBM Technologies](#ibm-granite--ibm-technologies)
-- [How IBM Bob Was Used](#how-ibm-bob-was-used)
-- [System Architecture](#system-architecture)
+- [AI Approach & IBM Technology](#ai-approach--ibm-technology)
+- [Technical Architecture & Data Flow](#technical-architecture--data-flow)
 - [Technology Stack](#technology-stack)
+- [Design Philosophy](#design-philosophy)
 - [Repository Structure](#repository-structure)
 - [Getting Started](#getting-started)
 - [Demo](#demo)
 - [Roadmap](#roadmap)
 - [Acknowledgements](#acknowledgements)
-- ---
 
 # 🎯 Product Vision
 
@@ -274,7 +272,7 @@ At the heart of the experience is the **FORGE Framework**—the framework that g
 
 ---
 
-## ⚒️ The FORGE Framework
+# ⚒️ The FORGE Framework
 
 The FORGE Framework provides a structured approach to developing campaigns.
 
@@ -604,7 +602,7 @@ flowchart TD
     R --> Q
 ```
 
-### 🔄 Core Data Flow
+## 🔄 Core Data Flow
 
 The main AI request cycle follows this sequence:
 
@@ -648,7 +646,7 @@ This separation allows the product to combine **structured campaign methodology,
 
 ---
 
-## 🧰 Technology Stack
+# 🧰 Technology Stack
 
 The current implementation brings together several technologies and services:
 
@@ -668,7 +666,7 @@ The project was developed and iterated through sprint-based development, with IB
 
 ---
 
-## 🔭 Design Philosophy
+# 🔭 Design Philosophy
 
 The technical architecture reflects the broader philosophy behind Campaign Forge AI:
 
