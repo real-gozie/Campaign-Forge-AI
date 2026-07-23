@@ -5036,6 +5036,12 @@ function saveGraniteConfigFromUI() {
   if (modelEl && modelEl.value) GRANITE_CONFIG.model     = modelEl.value;
 
   saveGraniteConfig();
+ 
+   console.log(
+    'Saved Granite config:',
+    localStorage.getItem('granite_config_v2')
+  );
+ 
   updateSettingsButtonState();
 
   var status = document.getElementById('gcpStatus');
