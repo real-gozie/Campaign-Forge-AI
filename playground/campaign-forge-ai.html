@@ -4939,7 +4939,7 @@ startForging = function() {
 // apiKey is REMOVED — the IBM API key now lives only in the Cloudflare
 // Worker Secret store. The browser never sees it.
 var GRANITE_CONFIG = {
-  workerUrl: '',   // e.g. https://campaign-forge-ai-proxy.YOUR-SUBDOMAIN.workers.dev
+  workerUrl: 'https://campaign-forge-ai-proxy.gozie-labs.workers.dev',
   model:     "ibm/granite-3-8b-instruct"
 };
 
@@ -5015,6 +5015,11 @@ function openGraniteConfig() {
 }
 
 function closeGraniteConfig() {
+  // Auto-save whatever is in the fields so the user never has to click Save explicitly
+  var urlEl = document.getElementById('gcp-worker-url');
+  if (urlEl && urlEl.value.trim()) {
+    saveGraniteConfigFromUI();
+  }
   var panel = document.getElementById('granite-config-panel');
   if (panel) panel.classList.remove('open');
   var status = document.getElementById('gcpStatus');
