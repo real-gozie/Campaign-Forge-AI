@@ -22,13 +22,13 @@
 
 ---
 
-## ✨ At a Glance
+# ✨ At a Glance
 
 Campaign Forge AI helps creators move beyond isolated AI prompts and disconnected creative tools.
 
 It brings campaign thinking into one structured workflow where ideas can be explored, challenged, refined, and developed into campaigns ready for real-world implementation.
 
-### What Campaign Forge AI Helps You Do
+## What Campaign Forge AI Helps You Do
 
 - 💡 **Find and frame the challenge** behind an idea.
 - 🧠 **Strengthen campaign strategy** through structured creative thinking.
@@ -40,12 +40,13 @@ It brings campaign thinking into one structured workflow where ideas can be expl
 
 ---
 
-## Table of Contents
+# Table of Contents
 
 - [Product Vision](#-product-vision)
 - [Why "Forge"?](#%EF%B8%8F-why-forge) 
 - [The Challenge](#-the-challenge)
 - [Our Solution](#-our-solution)
+- [Selected Challenge Theme](#-selected-challenge-theme)
 - [Why Campaign Forge AI Matters](#-why-campaign-forge-ai-matters)
 - [What Makes Campaign Forge AI Different](#-what-makes-campaign-forge-ai-different) 
 - [Design Principles](#-design-principles)
@@ -158,6 +159,22 @@ The result is a more structured approach to campaign development—one that comb
 Campaign Forge AI does not aim to replace the creator.
 
 It aims to help the creator **think better, create smarter, and move from ideas to action**.
+
+---
+
+# 🏆 Selected Challenge Theme
+
+**Create with AI: The Future of Creative Industries**
+
+Campaign Forge AI was developed for the **July 2026 IBM AI Builders Challenge with IBM Bob**, under the theme **"Create with AI: The Future of Creative Industries."**
+
+The project explores how AI can be used not simply to generate content, but to reimagine the creative process itself.
+
+Campaign Forge AI applies this idea to campaign development by combining structured creative thinking, human judgment, and AI-assisted intelligence in a connected workflow. The platform helps creators move from raw ideas through strategy, refinement, creative development, evaluation, and toward implementation-ready campaigns.
+
+IBM Bob was used as the primary AI-powered development environment during the prototyping and development of the platform, while IBM Granite, accessed through IBM watsonx.ai, provides the AI-assisted intelligence layer within the final application.
+
+Through this approach, Campaign Forge AI explores how AI can strengthen human creativity, critical thinking, and strategic decision-making while helping creators build more purposeful and actionable campaigns.
 
 ---
 
