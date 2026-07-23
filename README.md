@@ -871,38 +871,59 @@ The IBM API credentials are securely handled by the Cloudflare Worker and are no
 
 If the IBM Granite integration is unavailable, Campaign Forge AI can continue using its built-in fallback expert templates.
 
-# 🗺️ Roadmap
+# 🛣️ Roadmap
 
-Campaign Forge AI is currently a working prototype focused on demonstrating an integrated campaign-development workflow powered by structured thinking and AI-assisted analysis.
+Campaign Forge AI is currently a working prototype focused on demonstrating an integrated campaign-development workflow powered by structured thinking, the FORGE Framework, and AI-assisted analysis.
 
-Future development will focus on moving the prototype toward a more accessible, scalable, and production-ready platform.
+The current prototype demonstrates the core campaign workflow, including guided campaign development, IBM Granite-assisted analysis, five-perspective expert review, strategic recommendations, risk assessment, campaign studio outputs, and multi-format campaign export.
 
-## Near-Term Priorities
+Future development will focus on moving the prototype toward a more accessible, scalable, collaborative, and production-ready platform.
 
-- **🌐 Hosted Web Experience** — Deploy Campaign Forge AI as an accessible web application so users can explore the platform without downloading or opening HTML files locally.
-- **📸 Product Documentation** — Expand visual documentation with screenshots and guided walkthroughs of the core campaign-development experience.
-- **📄 Campaign Export Improvements** — Strengthen campaign export capabilities across Markdown, DOCX, and PDF formats for easier sharing, review, and implementation.
-- **🤖 AI Reliability & Evaluation** — Continue improving the quality, consistency, explainability, and reliability of IBM Granite-assisted campaign analysis.
-- **🔐 Production Security** — Strengthen authentication, access controls, CORS restrictions, and other security measures required for a production deployment.
-- **📊 Campaign Performance Tracking** — Explore ways to connect campaign planning with real-world implementation and performance monitoring.
-- **💾 Campaign Persistence** — Enable users to securely save, revisit, version, and continue developing campaigns over time.
-- **👥 Collaboration Features** — Explore collaborative workflows that allow campaign teams, partners, and stakeholders to review and refine campaigns together.
+## Current Prototype Milestones
 
-## Long-Term Vision
+- 🚀 End-to-End Campaign Workflow — Guided campaign development from initial campaign inputs through strategy, communication, creative development, implementation planning, measurement, and evaluation.
+- 🧠 FORGE Framework — Structured thinking framework integrated into the campaign-development experience.
+- 🤖 IBM Granite Integration — AI-assisted campaign analysis and expert review powered through a Cloudflare Worker proxy.
+- 🔍 Five-Perspective Expert Review — Multiple strategic perspectives used to assess campaign quality and identify opportunities for improvement.
+- ⚠️ Risk Assessment — Structured identification and assessment of campaign risks and mitigation strategies.
+- 📄 Campaign Export — Export campaign outputs across PDF, DOCX-compatible, and Markdown formats.
+- 📸 Product Documentation — Visual documentation covering the core Campaign Forge AI experience and major workflow stages.
+
+## 🔭 Future Development
+
+🌐 **Hosted Web Experience** — Evolve the current prototype into a fully hosted web application so users can access Campaign Forge AI without downloading or opening HTML files locally.
+
+🤖 **AI Reliability & Evaluation** — Continue improving the quality, consistency, explainability, and reliability of IBM Granite-assisted campaign analysis through structured evaluation and iterative testing.
+
+🔐 **Production Security** — Strengthen authentication, access controls, CORS restrictions, data protection, and other security measures required for a production deployment.
+
+💾 **Campaign Persistence** — Enable users to securely save, revisit, version, and continue developing campaigns over time.
+
+📊 **Campaign Performance Tracking** — Explore ways to connect campaign planning with real-world implementation, monitoring, and performance data.
+
+👥 **Collaboration Features** — Introduce collaborative workflows that allow campaign teams, partners, and stakeholders to review, comment on, and refine campaigns together.
+
+📄 **Advanced Campaign Outputs** — Further improve campaign reporting and export capabilities with richer document formatting, branded reports, and implementation-ready deliverables.
+
+📈 **Scalable Campaign Intelligence** — Explore future capabilities that connect campaign strategy, audience insights, implementation data, and performance outcomes to support more adaptive and evidence-informed campaign development.
+
+## 🌍 Long-Term Vision
 
 The long-term goal is to evolve Campaign Forge AI from a browser-based prototype into a comprehensive campaign development environment that helps individuals and teams move from an initial idea to a structured, creative, measurable, and implementation-ready campaign.
 
-The platform will continue to prioritize human judgment and creativity, using AI as an assistive layer that helps users think more critically, identify gaps, explore possibilities, and strengthen their campaign decisions.
+The platform will continue to prioritize human judgment and creativity, using AI as an assistive layer rather than a replacement for strategic thinking. AI will help users think more critically, identify gaps, explore possibilities, challenge assumptions, and strengthen their campaign decisions.
+
+The ultimate vision is to make high-quality campaign strategy more structured, accessible, and actionable—helping campaign teams move confidently from **idea → strategy → action → measurement → learning**.
 
 # 🙏 Acknowledgements
 
-Campaign Forge AI was developed with inspiration and support from the broader open-source, AI, and social impact communities.
+Campaign Forge AI was developed with inspiration, support, and technology from the broader open-source, AI, and social impact communities.
 
 Special acknowledgement goes to:
 
-- **IBM** — for providing IBM Granite and IBM watsonx.ai technologies that support the platform's AI-assisted campaign analysis and development workflow.
-- **IBM Bob** — for providing the development environment used to prototype and build Campaign Forge AI.
-- **Cloudflare** — for providing the Worker infrastructure used as the server-side proxy for the IBM Granite integration.
-- **Open-source contributors and communities** — whose tools, libraries, documentation, and shared knowledge continue to make experimentation and innovation more accessible.
+- **IBM** — for providing **IBM Granite** and **IBM watsonx.ai** technologies that support the platform's AI-assisted campaign analysis and development workflow.
+- **IBM Bob** — for providing the development environment used to prototype, build, test, and iterate on Campaign Forge AI.
+- **Cloudflare** — for providing the Worker infrastructure used as the server-side proxy for the IBM Granite integration, helping keep IBM API credentials out of the browser.
+- **Open-source contributors and communities** — whose tools, libraries, documentation, and shared knowledge continue to make experimentation, learning, and innovation more accessible.
 
-Campaign Forge AI is built around the belief that technology should help people turn ideas into meaningful action—and that AI is most valuable when it strengthens human creativity, critical thinking, and decision-making.
+Campaign Forge AI is built around the belief that technology should help people turn ideas into meaningful action—and that AI is most valuable when it strengthens human creativity, critical thinking, and decision-making rather than replacing them.
