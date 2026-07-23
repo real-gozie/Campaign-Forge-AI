@@ -809,17 +809,67 @@ If the IBM Granite integration is not configured or unavailable, Campaign Forge 
 
 # 🚀 Demo
 
-**[https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html](https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html)**
+👉 [Launch Campaign Forge AI](https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html)
 
-The live demo runs entirely in the browser — no install, no build step, no account required to explore the workflow.
+The live demo runs directly in the browser with no installation, build step, or account required to explore the Campaign Forge AI workflow.
 
-To activate IBM Granite AI features:
-1. Click **⚙ AI Settings** in the wizard nav bar
-2. Paste your Cloudflare Worker URL (see `playground/cloudflare-worker/DEPLOY.md`)
-3. Click **Test Connection** to verify — then start forging
+The live demonstration is connected to the **IBM Granite AI integration** through a secure **Cloudflare Worker proxy**, enabling AI-assisted campaign analysis, expert review, strategic insights, and recommendations.
 
-The prototype demonstrates the complete Campaign Forge AI experience: structured campaign workflow, FORGE Framework, AI-assisted expert review, strategic insights, creative development, implementation planning, measurement, and campaign export (PDF, DOCX, Markdown).
-- **`README.md`** — Project documentation, architecture overview, setup information, and development notes.
+## What You Can Explore
+
+- Guided campaign development
+- The FORGE Framework
+- AI-assisted campaign analysis
+- Five-perspective expert review
+- Strategic insights and recommendations
+- Communication strategy development
+- Creative campaign development
+- Implementation planning
+- Measurement and evaluation
+- Risk assessment
+- Campaign export options
+
+## 📸 Product Screenshots
+
+### Campaign Forge AI Landing Page
+
+![Campaign Forge AI Landing Page](assets/screenshots/01-landing-page.png.png)
+
+### Campaign Creation Workflow
+
+![Campaign Creation Workflow](assets/screenshots/02-campaign-creation.png.png)
+
+### AI Expert Review — Overview
+
+![AI Expert Review Overview](assets/screenshots/03-ai-expert-review-overview.png.png)
+
+### AI Expert Review — Recommendations
+
+![AI Expert Review Recommendations](assets/screenshots/03-ai-expert-review-recommendations.png.png)
+
+### Campaign Studio
+
+![Campaign Studio](assets/screenshots/04-campaign-studio.png.png)
+
+### Risk Assessment Dashboard
+
+![Risk Assessment Dashboard](assets/screenshots/04-risk-assessment%20-dashboard.png.png)
+
+### Campaign Export Suite
+
+![Campaign Export Suite](assets/screenshots/05-export-suite.png.png)
+
+## 🔧 Local Configuration
+
+For local development or self-hosted deployments, the IBM Granite integration can be configured through **⚙ AI Settings** using the deployed Cloudflare Worker URL.
+
+Deployment and configuration instructions are available in:
+
+[`playground/cloudflare-worker/DEPLOY.md`](playground/cloudflare-worker/DEPLOY.md)
+
+The IBM API credentials are securely handled by the Cloudflare Worker and are not exposed directly in the browser.
+
+If the IBM Granite integration is unavailable, Campaign Forge AI can continue using its built-in fallback expert templates.
 
 # 🗺️ Roadmap
 
