@@ -768,8 +768,7 @@ Campaign-Forge-AI/
 ├── settings/
 │   └── settings.json
 │
-└── README.md
-
+├── LICENSE
 └── README.md
 ```
 
@@ -784,6 +783,8 @@ Campaign-Forge-AI/
 - **`playground/cloudflare-worker/wrangler.toml`** — Cloudflare Worker deployment and environment configuration.
 - **`playground/cloudflare-worker/DEPLOY.md`** — Deployment instructions for configuring and deploying the Cloudflare Worker.
 - **`settings/`** — Project-level configuration files.
+- **`LICENSE`** — MIT License for the project.
+- **`README.md`** — Project documentation, architecture overview, setup information, and development notes.
 
 # 🚀 Getting Started
 
