@@ -4922,7 +4922,7 @@ startForging = function() {
 //
 // ARCHITECTURE (proxy mode — no IBM credentials in the browser)
 // ─────────────────────────────────────────────────────────────────────
-// 1. GRANITE_CONFIG  — stores Worker URL + model selection (sessionStorage)
+// 1. GRANITE_CONFIG  — stores Worker URL + model selection (localStorage)
 //                      API key lives ONLY in the Cloudflare Worker Secret store.
 // 2. callWorkerProxy() — single POST to the Worker /analyze endpoint
 // 3. buildGranitePrompt() — assembles prompt from formData (unchanged)
@@ -4935,7 +4935,7 @@ startForging = function() {
 // Worker deployment instructions: cloudflare-worker/DEPLOY.md
 // ─────────────────────────────────────────────────────────────────────
 
-// ── Configuration object (loaded from sessionStorage on init) ────────
+// ── Configuration object (loaded from localStorage on init) ────────
 // apiKey is REMOVED — the IBM API key now lives only in the Cloudflare
 // Worker Secret store. The browser never sees it.
 var GRANITE_CONFIG = {
@@ -4947,10 +4947,10 @@ var GRANITE_CONFIG = {
 var aiGeneratedData  = null;   // populated with parsed Granite output
 var aiCallInProgress = false;
 
-// ── Load saved config from sessionStorage ────────────────────────────
+// ── Load saved config from localStorage ────────────────────────────
 (function loadGraniteConfig() {
   try {
-    var saved = sessionStorage.getItem('granite_config_v2');
+    var saved = localStorage.getItem('granite_config_v2');
     if (saved) {
       var parsed = JSON.parse(saved);
       GRANITE_CONFIG.workerUrl = parsed.workerUrl || '';
@@ -4962,7 +4962,7 @@ var aiCallInProgress = false;
 
 function saveGraniteConfig() {
   try {
-    sessionStorage.setItem('granite_config_v2', JSON.stringify(GRANITE_CONFIG));
+    localStorage.setItem('granite_config_v2', JSON.stringify(GRANITE_CONFIG));
   } catch(e) { /* ignore */ }
 }
 
@@ -6814,55 +6814,28 @@ function s9CollectCampaignContent() {
 function s9ExportPDF() {
   var c = s9CollectCampaignContent();
 
-  var pItems = function(arr) { return (arr || []).map(function(i){ return '<li style="margin-bottom:4px">' + i + '</li>'; }).join('') || '<li>—</li>'; };
-  var pField = function(v)   { return (v || '—'); };
-
-  var html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + c.name + ' — Campaign Forge AI</title>'
-    + '<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,"Segoe UI",sans-serif;font-size:13px;line-height:1.65;color:#1f2328;padding:40px 52px;max-width:860px;margin:0 auto}'
-    + 'h1{font-size:26px;font-weight:800;letter-spacing:-.03em;margin-bottom:6px}h2{font-size:16px;font-weight:800;letter-spacing:-.01em;margin:28px 0 10px;padding-bottom:6px;border-bottom:2px solid #e5e7eb;color:#1a2e50}'
-    + 'h3{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#57606a;margin:14px 0 4px}p{color:#1f2328;margin-bottom:8px}ul{padding-left:16px;margin-bottom:8px}'
-    + '.meta{font-size:11px;color:#57606a;margin-bottom:28px;padding-bottom:16px;border-bottom:1px solid #e5e7eb}'
-    + '.badge{display:inline-block;background:#eff4fc;border:1px solid #c8daf5;color:#2563b0;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;margin-right:8px}'
-    + '.risk-high{color:#c0392b;font-weight:700}.risk-medium{color:#d97706;font-weight:700}.risk-low{color:#1a7f4e;font-weight:700}'
-    + '.footer{margin-top:48px;padding-top:16px;border-top:1px solid #e5e7eb;font-size:11px;color:#57606a;text-align:center}'
-    + '@media print{body{padding:20px 28px}}</style></head><body>'
+  var html = '<!DOCTYPE html>'
+    + '<html>'
+    + '<head>'
+    + '<meta charset="UTF-8">'
+    + '<title>' + c.name + ' - Campaign Forge AI</title>'
+    + '</head>'
+    + '<body>'
     + '<h1>' + c.name + '</h1>'
-    + '<div class="meta"><span class="badge">Campaign Forge AI</span><span class="badge">Powered by IBM Granite</span> Generated: ' + c.ts + ' · AI Confidence: ' + c.conf + '%</div>'
-    + '<h2>Campaign Overview</h2><p>' + pField(c.summary) + '</p>'
-    + '<h2>Campaign Strategy Brief</h2>'
-    + '<h3>Overview</h3><p>' + pField(c.strategy.overview) + '</p>'
-    + '<h3>Problem Statement</h3><p>' + pField(c.strategy.problem) + '</p>'
-    + '<h3>Campaign Goal</h3><p>' + pField(c.strategy.goal) + '</p>'
-    + '<h3>Target Audience</h3><p>' + pField(c.strategy.audience) + '</p>'
-    + '<h3>Strategic Approach</h3><p>' + pField(c.strategy.strategic) + '</p>'
-    + '<h3>Theory of Change</h3><p>' + pField(c.strategy.toc) + '</p>'
-    + '<h2>Communication Strategy</h2>'
-    + '<h3>Core Message</h3><p>' + pField(c.comms.coreMsg) + '</p>'
-    + '<h3>Key Messages</h3><ul>' + pItems(c.comms.keyMsgs) + '</ul>'
-    + '<h3>Communication Channels</h3><p>' + pField(c.comms.channels) + '</p>'
-    + '<h3>Content Themes</h3><ul>' + pItems(c.comms.themes) + '</ul>'
-    + '<h2>Creative Campaign Kit</h2>'
-    + '<h3>Campaign Slogans</h3><ul>' + pItems(c.creative.slogans) + '</ul>'
-    + '<h3>Visual Direction</h3><p>' + pField(c.creative.visual) + '</p>'
-    + '<h3>Social Media Concepts</h3><p>' + pField(c.creative.social) + '</p>'
-    + '<h2>Implementation Timeline</h2><p>' + pField(c.roadmap.timeline) + '</p>'
-    + '<h3>Key Activities</h3><ul>' + pItems(c.roadmap.activities) + '</ul>'
-    + '<h3>Stakeholders</h3><p>' + pField(c.roadmap.stakeholders) + '</p>'
-    + '<h3>Partnerships</h3><p>' + pField(c.roadmap.partnerships) + '</p>'
-    + '<h2>Monitoring &amp; Evaluation</h2>'
-    + '<h3>Indicators</h3><ul>' + pItems(c.measurement.indicators) + '</ul>'
-    + '<h3>KPIs</h3><p>' + pField(c.measurement.kpis) + '</p>'
-    + '<h3>Evaluation Approach</h3><p>' + pField(c.measurement.evalApproach) + '</p>'
-    + '<h2>Risk Assessment</h2>'
-    + c.risks.map(function(r){ return '<p><span class="risk-' + r.level.toLowerCase() + '">[' + r.level + ']</span> <strong>' + r.name + '</strong> — ' + r.mitigation + '</p>'; }).join('')
-    + '<h2>IBM Granite Recommendations</h2>'
-    + c.recs.map(function(r){ return '<p>• ' + r + '</p>'; }).join('')
-    + (c.teamRec ? '<p><strong>Team Recommendation:</strong> ' + c.teamRec + '</p>' : '')
-    + '<div class="footer">Generated by Campaign Forge AI · Powered by IBM Granite · ' + c.ts + '</div>'
-    + '</body></html>';
+    + '<p>Campaign Forge AI</p>'
+    + '<p>Generated: ' + c.ts + '</p>'
+    + '</body>'
+    + '</html>';
 
   var w = window.open('', '_blank');
-  if (w) { w.document.write(html); w.document.close(); setTimeout(function() { w.print(); }, 400); }
+
+  if (w) {
+    w.document.write(html);
+    w.document.close();
+    setTimeout(function() {
+      w.print();
+    }, 400);
+  }
 }
 
 // F4b: DOCX export — generates a rich-text blob (HTML-based RTF wrapper)
