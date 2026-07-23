@@ -667,22 +667,36 @@ This separation allows the product to combine **structured campaign methodology,
 
 # 🧰 Technology Stack
 
-The current implementation brings together several technologies and services:
+The current Campaign Forge AI prototype brings together a combination of frontend technologies, AI services, serverless infrastructure, and structured application logic.
 
 | Layer | Technology / Component |
 |---|---|
-| Frontend | HTML, CSS, JavaScript |
-| AI Foundation Model | IBM Granite |
-| AI Platform | IBM watsonx.ai |
-| Authentication | IBM IAM |
-| AI Proxy / Serverless Layer | Cloudflare Workers |
-| Worker Configuration | Cloudflare Wrangler |
-| Runtime AI Configuration | Browser `sessionStorage` |
-| AI Response Format | Structured JSON |
-| Fallback Layer | Static expert templates |
+| **Frontend** | HTML, CSS, JavaScript |
+| **AI Foundation Model** | IBM Granite |
+| **AI Platform** | IBM watsonx.ai |
+| **Authentication** | IBM IAM |
+| **AI Proxy / Serverless Layer** | Cloudflare Workers |
+| **Worker Configuration & Deployment** | Cloudflare Wrangler |
+| **Runtime AI Configuration** | Browser `localStorage` |
+| **AI Response Format** | Structured JSON |
+| **AI Output Processing** | JavaScript response parsing and structured application state |
+| **Fallback Layer** | Static expert templates |
+| **Development Environment** | IBM Bob |
 
-The project was developed and iterated through sprint-based development, with IBM Bob used as the primary development environment during the build process.
+## Technology Roles
 
+- **HTML, CSS, and JavaScript** — Power the browser-based Campaign Forge AI interface, guided campaign workflow, campaign development modules, and interactive user experience.
+- **IBM Granite** — Provides the foundation model used for AI-assisted campaign analysis, expert perspectives, strategic recommendations, and campaign-development support.
+- **IBM watsonx.ai** — Provides access to the IBM Granite inference services used by the application.
+- **IBM IAM** — Handles the authentication flow required for the application to access IBM watsonx.ai services through the server-side integration.
+- **Cloudflare Workers** — Acts as the server-side proxy between the browser application and IBM's AI services, keeping the IBM API key outside the client-side application.
+- **Cloudflare Wrangler** — Supports configuration and deployment of the Cloudflare Worker.
+- **Browser `localStorage`** — Stores the Worker URL and selected model configuration locally in the browser so the AI integration settings persist across browser sessions.
+- **Structured JSON** — Provides a consistent format for AI-generated campaign analysis and recommendations, allowing the application to distribute generated outputs across multiple campaign-development modules.
+- **Static Expert Templates** — Provide a fallback experience when live IBM Granite inference is unavailable or when AI-generated responses cannot be successfully processed.
+- **IBM Bob** — Served as the primary development environment used to prototype, build, test, and iterate on Campaign Forge AI.
+
+The project was developed through sprint-based iteration, combining structured campaign methodology, frontend development, AI integration, and continuous product validation.
 ---
 
 # 🔭 Design Philosophy
