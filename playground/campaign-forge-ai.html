@@ -4950,7 +4950,7 @@ var aiCallInProgress = false;
 // ── Load saved config from sessionStorage ────────────────────────────
 (function loadGraniteConfig() {
   try {
-    var saved = sessionStorage.getItem('granite_config_v2');
+    var saved = localStorage.getItem('granite_config_v2');
     if (saved) {
       var parsed = JSON.parse(saved);
       GRANITE_CONFIG.workerUrl = parsed.workerUrl || '';
@@ -4962,7 +4962,7 @@ var aiCallInProgress = false;
 
 function saveGraniteConfig() {
   try {
-    sessionStorage.setItem('granite_config_v2', JSON.stringify(GRANITE_CONFIG));
+    localStorage.setItem('granite_config_v2', JSON.stringify(GRANITE_CONFIG));
   } catch(e) { /* ignore */ }
 }
 
