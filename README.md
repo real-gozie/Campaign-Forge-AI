@@ -12,6 +12,10 @@
 <img src="https://img.shields.io/badge/IBM%20Granite-Powered-blue" alt="IBM Granite"/>
 <img src="https://img.shields.io/badge/IBM%20Bob-Challenge-purple" alt="IBM Bob Challenge"/>
 <img src="https://img.shields.io/badge/Status-Prototype-success" alt="Prototype"/>
+<br/><br/>
+<a href="https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html">
+<img src="https://img.shields.io/badge/🚀%20Live%20Demo-GitHub%20Pages-3b82d4?style=for-the-badge" alt="Live Demo"/>
+</a>
 </p>
 
 </div>
@@ -761,13 +765,16 @@ cd Campaign-Forge-AI
 
 ## 2. Open the Prototype
 
-Navigate to the `playground/` directory and open:
+**Easiest — no install required:**
 
-```text
-campaign-forge-ai.html
-```
+👉 **[Live Demo on GitHub Pages](https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html)**
 
-You can open the file directly in a modern web browser such as Google Chrome, Microsoft Edge, or Mozilla Firefox.
+**To run locally**, navigate to the `playground/` directory and serve the file over HTTP:
+
+- **VS Code:** Right-click `campaign-forge-ai.html` → **Open with Live Server**
+- **Terminal:** `npx serve playground` then open `http://localhost:3000`
+
+> ⚠️ Do not open the file directly via `file://` — AI calls and saved settings require an `http://` origin.
 
 ## 3. Explore the Campaign Workflow
 
@@ -802,17 +809,16 @@ If the IBM Granite integration is not configured or unavailable, Campaign Forge 
 
 # 🚀 Demo
 
-Campaign Forge AI is currently available as a browser-based prototype that can be run locally.
+**[https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html](https://real-gozie.github.io/Campaign-Forge-AI/playground/campaign-forge-ai.html)**
 
-To explore the prototype:
+The live demo runs entirely in the browser — no install, no build step, no account required to explore the workflow.
 
-1. Clone or download the repository.
-2. Open the `playground/` directory.
-3. Open `campaign-forge-ai.html` in a modern web browser.
+To activate IBM Granite AI features:
+1. Click **⚙ AI Settings** in the wizard nav bar
+2. Paste your Cloudflare Worker URL (see `playground/cloudflare-worker/DEPLOY.md`)
+3. Click **Test Connection** to verify — then start forging
 
-The prototype demonstrates the complete Campaign Forge AI experience, including the structured campaign-development workflow, FORGE Framework, AI-assisted expert review, strategic insights, creative development, implementation planning, measurement, and campaign export capabilities.
-
-> **Demo access:** A hosted version of Campaign Forge AI is planned for future deployment. For the current prototype, please run the application locally using the instructions in the [Getting Started](#getting-started) section.
+The prototype demonstrates the complete Campaign Forge AI experience: structured campaign workflow, FORGE Framework, AI-assisted expert review, strategic insights, creative development, implementation planning, measurement, and campaign export (PDF, DOCX, Markdown).
 - **`README.md`** — Project documentation, architecture overview, setup information, and development notes.
 
 # 🗺️ Roadmap
